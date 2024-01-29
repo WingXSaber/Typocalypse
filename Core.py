@@ -1,5 +1,15 @@
 #Import Built-in Modules
 import os;
 
-#Initialize things needed by entire project =================================
-dir_path = os.path.dirname(os.path.realpath(__file__));  #Initialize path of the system
+
+
+class Core():    
+    
+    #Initialize things needed by entire project =================================            
+    def __init__(self):        
+        pass;
+        
+    def PACK():
+        pass;
+
+
