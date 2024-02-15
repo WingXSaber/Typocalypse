@@ -105,7 +105,9 @@ class Typocalpyse():
         # elif gamestate = Game
         #   #call game class tick(deltaTime)
         for obj in self.core.gameObjectList:
-            obj.tick(deltaTime);     
+            #if(obj.id != GameObjectID.ENEMY):
+                obj.tick(deltaTime);    
+             
         # elif gamestate = highscoremenu
         #   #call Highscore class tick(deltaTime)
         # or use swtich case

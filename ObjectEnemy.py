@@ -57,11 +57,7 @@ class ObjectEnemy(GameObject):
         return q0; #head node
     
             
-    def tick(self, deltaTime):       
-        #Update State:        
-        #q3 = State("q3","Hurt");
-        #q4 = State("q4","Defeated");
-        #q5 = State("q5","Stop");
+    def tick(self, deltaTime):     
         match (self.state.name):
             case "q0": #Idle           
                 self.velX = 0;
@@ -101,11 +97,6 @@ class ObjectEnemy(GameObject):
                 if(self.velY != 0):
                     self.applyFrictionY();
                     
-                #else: #if(self.core.player.health > 0 ):
-                    #self.core.player.health -= 1;
-                
-                #if( self.core.player.health > 0 and self.getDistance(self.core.player) >= self.attackRange):
-                #    self.state = self.state.getNext("q0");
                 if(self.attackStartTimer <= time.time()):
                     self.attackStartTimer = 0;
                     self.state = self.state.getNext("q0");
@@ -152,6 +143,7 @@ class ObjectEnemy(GameObject):
         else:
             pyg.draw.rect(self.core.mainSurface, pyg.Color(0,120,0), (self.x, self.y, self.sizeX, self.sizeY ), 0);
         
+        
     def renderUI(self):
         if(self.state.name == "q4"):
             textSurface = self.core.fontDefault.render(str(self.name), True, (160,160,160));
@@ -159,6 +151,7 @@ class ObjectEnemy(GameObject):
         else:
             textSurface = self.core.fontDefault.render(str(self.name), True, (255,255,255));
             self.core.mainSurface.blit(textSurface, (self.x+int(self.sizeX/2)-int(textSurface.get_width()/2), self.y-textSurface.get_height()));            
+        
         #self.core.mainSurface.blit(self.core.fontDefault.render("State:"+str(self.state.name), True, (255,255,255)), (self.x+10, self.y+5));            
         #self.core.mainSurface.blit(self.core.fontDefault.render("Health:"+str(self.health), True, (255,255,255)), (self.x+10, self.y+20));            
         

@@ -279,7 +279,7 @@ class Core():
         self.playerMaxHealth = 100;
         self.player = ObjectPlayer(self, 500, 500, size, size, 5, self.playerMaxHealth);          
         
-        enemy1 = ObjectEnemy (self, 250, 250, size, size, 4, 10, "ALT");  
+        enemy1 = ObjectEnemy (self, 1000, 250, size, size, 4, 10, "ALT");  
         enemy2 = ObjectEnemy (self, 500, 250, size, size, 4, 10, "BOAR");  
         enemy3 = ObjectEnemy (self, 750, 250, size, size, 4, 10, "BOAT");  
         enemy4 = ObjectEnemy (self, 250, 100, size, size, 4, 10, "CORE");  
