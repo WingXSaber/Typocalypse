@@ -7,16 +7,17 @@ from screeninfo import get_monitors;
 
 class Window():
 
-    def __init__(self, Core):
+    def __init__(self, Core):        
+        #Set window to center of screen
+        self.DISPLAY_FLAGS = pyg.RESIZABLE | pyg.SHOWN ;
+        monitors = get_monitors();  #Get current monitor and the resolution
         
         #Initialize window and variables =============================================
-        screenWidth = 1024;
-        screenHeight = 768;
-        self.DISPLAY_FLAGS = pyg.RESIZABLE | pyg.SHOWN ;
-
-        #Set window to center of screen
-        monitors = get_monitors();  #Get current monitor and the resolution
-        os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (monitors[0].width/2-screenWidth/2,(monitors[0].height/2-screenHeight/2));
+        #screenWidth = 1024;
+        #screenHeight = 768;
+        #os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (monitors[0].width/2-screenWidth/2,(monitors[0].height/2-screenHeight/2));
+        screenWidth = monitors[0].width;
+        screenHeight = monitors[0].height;
               
         #Create Window and main display
         Core.mainSurface = pyg.display.set_mode( (screenWidth, screenHeight), self.DISPLAY_FLAGS);

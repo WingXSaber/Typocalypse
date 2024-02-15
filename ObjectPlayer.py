@@ -3,11 +3,13 @@ import pygame as pyg;
 
 #Import and initialize Project Modules ======================================
 from GameObject import GameObject, GameObjectID;
+from ObjectBullet import ObjectBullet;
 
 class ObjectPlayer(GameObject):
     
-    def __init__(self, core, x, y, sizeX, sizeY, speed):
+    def __init__(self, core, x, y, sizeX, sizeY, speed, health):
         super().__init__(GameObjectID.PLAYER, core, x, y, sizeX, sizeY, speed);
+        self.health = health;
         
     def tick(self, deltaTime):
         #Update Velocity X
@@ -37,8 +39,30 @@ class ObjectPlayer(GameObject):
                 self.velY+=self.speed/4; #add velocity until matching speed
         
         
-        self.applyVelocity(deltaTime);
+        self.applyVelocityWithCollision(deltaTime);
     
     def render(self):
-        pyg.draw.rect(self.core.mainSurface, pyg.Color(255,128,0), (self.x, self.y, self.sizeX, self.sizeY ), 2);
+        pyg.draw.rect(self.core.mainSurface, pyg.Color(20,20,255), (self.x, self.y, self.sizeX, self.sizeY ), 0);
+        pass;
+    
+    def getHurt(self, damage):
+        #add invulnuerablity time
+        if(self.health > 0):
+            self.health -= damage;
+        if(self.health < 0):
+            self.health = 0;
+            
+    def attack(self, enemyName):
+        #Change state to shooting
+        print("Shooting Enemy: "+enemyName);
+        bulletSize = 5;
+        bulletSpeed = 10;
+        
+        for obj in self.core.gameObjectList:
+            if(obj.id == GameObjectID.ENEMY and obj.name == enemyName):
+                self.core.addToObjectList(ObjectBullet(self.core, 
+                                                  self.x + (self.sizeX/2) - (bulletSize/2), 
+                                                  self.y + (self.sizeY/2) + (bulletSize/2),
+                                                  bulletSize, bulletSize, bulletSpeed, obj));
+        #Return state
         pass;
